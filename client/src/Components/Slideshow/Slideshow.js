@@ -41,9 +41,9 @@ function Slideshow() {
 
     return (
         <Carousel className='w-100 p-0'>
-            {Images.map((slide) => {
+            {Images.map((slide, index) => {
                 return(
-                    <Carousel.Item clasName='w-100'>
+                    <Carousel.Item className='w-100' key={index}>
                         <Image src={slide.url} alt='' className={slide.size} style={{filter: 'brightness(60%)'}}/>
                         <Carousel.Caption className='d-flex flex-column align-items-center align-items-md-start justify-content-start fw-bold mb-5'>
                             <h3>{slide.caption}</h3>

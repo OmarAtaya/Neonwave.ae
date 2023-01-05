@@ -2,11 +2,11 @@ import React from 'react';
 import { Container, Row } from 'react-bootstrap';
 import Bestseller from '../Components/Bestseller/Bestseller';
 import Info from '../Components/Info/Info';
-import Slideshow from '../Components/Slideshow/Slideshow'
+import Slideshow from '../Components/Slideshow/Slideshow';
 
 function Home() {
   return (
-    <Container fluid>
+    <Container fluid className=''>
       <Row>
         <Slideshow/>
         <Info/>

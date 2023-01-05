@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Container, Row } from 'react-bootstrap';
+import { Button, Container, Row, Col } from 'react-bootstrap';
 import ProductCard from '../ProductCard/ProductCard';
 import Data from './Products';
 
@@ -9,10 +9,12 @@ function Bestseller() {
             <Row>
                 <h3>Best Seller</h3>
             </Row>
-            <Row className="d-flex flex-row mb-5">
-                {Data.map((product) => {
+            <Row xs={2} md={4}>
+                {Data.map((product, index) => {
                     return(
-                        <ProductCard product={product}/>
+                        <Col className="mb-5" key={index}>
+                            <ProductCard product={product}/>
+                        </Col>
                     )
                 })}
             </Row>

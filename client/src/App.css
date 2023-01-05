@@ -5,11 +5,10 @@
 
 .background{
   background-color: #25a9c8;
-  z-index: 1;
+  z-index: 10;
 }
 
 .background__move{
-  background-color: #25a9c8;
   position: fixed;
   top: 0;
   right: 0;
@@ -18,7 +17,6 @@
 }
 
 .background__start{
-  background-color: transparent;
   position: absolute;
   z-index: 10;
 }
@@ -35,9 +33,10 @@
   top: 0;
   left: -100%;
   transition: 1050ms;
-  padding: 48px 0 0;
+  padding: 48px 10px 0;
   border-right: 1px solid gray;
   z-index: 100;
+  text-align: start;
 }
 
 .nav__menu.active {
@@ -46,8 +45,50 @@
   z-index: 100;
 }
 
+.search__bar{
+  background-color: black;
+  width: 100%;
+  height: auto;
+  position: absolute;
+  left: -100%;
+  transition: 1050ms;
+  padding: 30px 0 0;
+  margin: none;
+  z-index: 100;
+}
+
+.search__bar.active {
+  position: relative;
+  left: 0;
+  transition: 1050ms;
+  z-index: 100;
+}
+
+.product__image{
+  width: 40%;
+}
+
+.carousel-indicators [data-bs-target] {
+  width: 10px !important;
+  height: 10px !important;
+  border: 1px solid transparent !important;
+  border-radius: 10px;
+}
+
+.color__button{
+  border: 2px solid white!important;
+}
+
 @media screen and (max-width: 768px) {
   .product__card{
     width: 50%!important;
+  }
+
+  .product__image{
+    width: 100%;
+  }
+
+  .nav__menu{
+    width: 75%;
   }
 }
