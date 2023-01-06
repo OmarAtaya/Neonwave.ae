@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import { Container, Carousel, Image, Row, Button, Form, Col, Collapse } from 'react-bootstrap';
 import Sign from '../assets/Sign.png';
 import Package from '../assets/Package.png';
@@ -7,6 +7,7 @@ import Backing from '../assets/Backing.jpg';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import { Helmet } from "react-helmet";
+import { Store } from '../Store';
 
 function Product() {
     const navigate = useNavigate();
@@ -23,6 +24,7 @@ function Product() {
     const [dimmerCheck, setDimmerCheck] = useState('default');
     const [backingCheck, setBackingCheck] = useState('default');
     const [waterCheck, setWaterCheck] = useState('default');
+    const {state: cart, dispatch: ctxDispatch} = useContext(Store);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -32,6 +34,13 @@ function Product() {
         }
         else{
             navigate('/')
+        }
+    }
+
+    const addToCartHandler = () => {
+        if(backingCheck !== 'default' && waterCheck !== 'default' && dimmerCheck !== 'default')
+        {
+            ctxDispatch({type:'CART_ADD_ITEM', payload: {...state, quantity: quantity}})
         }
     }
     
@@ -121,7 +130,7 @@ function Product() {
                                 <AiOutlinePlus size={20} onClick={() => {if(quantity < 20){setQuantity(quantity+1)}}}/>
                             </div>
                         </Form.Group>                        
-                        <Button type='submit' variant='outline-info' className='mt-4 w-100 p-3 fw-bold'>Add To Cart</Button>
+                        <Button type='submit' variant='outline-info' className='mt-4 w-100 p-3 fw-bold' onClick={addToCartHandler}>Add To Cart</Button>
                     </Form>
                 </Col>
                 <Col className='w-75'>

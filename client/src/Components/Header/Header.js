@@ -1,14 +1,17 @@
-import React, {useState} from 'react';
+import React, {useState,useContext} from 'react';
 import { Container, Row, Col, Image, Nav, Form, FormControl, Button } from 'react-bootstrap';
 import Logo from '../../assets/Neon_Wave_3_165x.png';
 import { MdOutlineMenu, MdOutlineShoppingBag, MdOutlineAccountCircle, MdOutlineSearch} from 'react-icons/md';
 import {AiOutlineClose} from 'react-icons/ai';
+import { Store } from '../../Store';
 import { Link } from 'react-router-dom';
 
 function Header() {
     const [color, setColor] = useState(false);
     const [menu, setMenu] = useState(false);
     const [search, setSearch] = useState(false);
+    const {state: cartState} = useContext(Store);
+    const {cart} = cartState;
 
     const changeColor = () => {
         if (window.scrollY >= 35)
@@ -40,7 +43,7 @@ function Header() {
                         <MdOutlineSearch size={30} color='white' onClick={() => {setSearch(prev => !prev)}}/>
                         <div className='cart'>
                             <MdOutlineShoppingBag size={30} color='white'/>
-                            <div className='cart__num'></div>
+                            <div className={cart.cartItems.length > 0 ?'cart__num': "d-none"}></div>
                         </div>
                         
                     </Col> 
