@@ -38,7 +38,11 @@ function Header() {
                     <Col className='d-flex justify-content-center align-items-center gap-3'>
                         <MdOutlineAccountCircle size={30} color='white'/>
                         <MdOutlineSearch size={30} color='white' onClick={() => {setSearch(prev => !prev)}}/>
-                        <MdOutlineShoppingBag size={30} color='white'/>
+                        <div className='cart'>
+                            <MdOutlineShoppingBag size={30} color='white'/>
+                            <div className='cart__num'></div>
+                        </div>
+                        
                     </Col> 
                 </Row>
                 <Row>

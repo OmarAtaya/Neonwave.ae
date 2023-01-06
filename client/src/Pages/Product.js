@@ -1,98 +1,130 @@
 import React, {useState} from 'react';
 import { Container, Carousel, Image, Row, Button, Form, Col, Collapse } from 'react-bootstrap';
-import Slide1 from '../assets/F3.png';
-import Slide2 from '../assets/F3-2.jpg';
 import Sign from '../assets/Sign.png';
 import Package from '../assets/Package.png';
 import Wire from '../assets/Wire.png';
 import Backing from '../assets/Backing.jpg';
-import {AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
+import { useLocation, useNavigate } from 'react-router-dom';
+import {AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
+import { Helmet } from "react-helmet";
 
 function Product() {
-    const [Images, setImages] = useState([
-        {
-            url: Slide1,
-        },
-        {
-            url: Slide2,
-        }
-    ]);
-    const [quantity, setQuantity] = useState(0);
+    const navigate = useNavigate();
+    const {state} = useLocation();
+    const [Images, setImages] = useState(state.images);
+    const [Sizes, setSizes] = useState(state.sizes);
+    const [Colors, setColors] = useState(state.colors);
+    const [quantity, setQuantity] = useState(1);
     const [descOpen, setDescOpen] = useState(true);
     const [fontOpen, setFontOpen] = useState(false);
     const [shipOpen, setShipOpen] = useState(false);
-    const [sizeCheck, setSizeCheck] = useState(1);
-    const [colorcheck, setColorCheck] = useState(1);
+    const [sizeCheck, setSizeCheck] = useState(0);
+    const [colorCheck, setColorCheck] = useState(0);
+    const [dimmerCheck, setDimmerCheck] = useState('default');
+    const [backingCheck, setBackingCheck] = useState('default');
+    const [waterCheck, setWaterCheck] = useState('default');
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if(backingCheck === 'default' || waterCheck === 'default' || dimmerCheck === 'default')
+        {
+            alert("Please Complete All Selections")
+        }
+        else{
+            navigate('/')
+        }
+    }
+    
     return (
         <Container className='mt-5'>
+            <Helmet>
+                <title>{state.title} - NeonWave</title>
+                <meta
+                name="description"
+                content="Beginner friendly page for learning React Helmet."
+                />
+            </Helmet>
             <Row className='d-flex justify-content-center'>
                 <Carousel className='product__image p-0'>
-                    {Images.map((slide) => {
+                    {Images.map((slide,index) => {
                         return(
-                            <Carousel.Item clasName='w-100'>
-                                <Image src={slide.url} alt='' className='product__image'/>
+                            <Carousel.Item className='w-100' key={index}>
+                                <Image src={slide} alt='' className='product__image'/>
                             </Carousel.Item>
                         )
                     })}
                 </Carousel>
             </Row>
-            <h2 className='text-info'>"F3" NEON SIGN</h2>
-            <h4 className='text-white fw-bold'>475 AED</h4>
+            <h2 className='text-info'>{state.title}</h2>
+            {state.prices.map((price,index) => {
+                return index === sizeCheck ? 
+                <h4 className='text-white fw-bold'>{price} AED</h4> 
+                : 
+                ''
+                
+            })}
             <Row className='text-white d-flex align-items-start gap-3 mt-5'>
                 <Col className='w-50'>
-                    <Form className='d-flex flex-column align-items-start'>
-                        <p className='fw-bold mt-3'>Size:</p>
-                        <div className='d-flex flex-wrap justify-content-center gap-4'>
-                            <Button variant='outline-light' className={1 === sizeCheck ? 'active' : ''} onClick={() => setSizeCheck(1)}>30 CM</Button>
-                            <Button variant='outline-light' className={2 === sizeCheck ? 'active' : ''} onClick={() => setSizeCheck(2)}>50 CM</Button>
-                            <Button variant='outline-light' className={3 === sizeCheck ? 'active' : ''} onClick={() => setSizeCheck(3)}>75 CM</Button>
-                            <Button variant='outline-light' className={4 === sizeCheck ? 'active' : ''} onClick={() => setSizeCheck(4)}>100 CM</Button>
-                        </div>
-                        <p className='fw-bold mt-3'>Color:</p>
-                        <div className='d-flex flex-wrap justify-content-center align-items-center gap-4'>
-                            <div className={1 === colorcheck ? 'color__button rounded' : ''}>
-                                <Button variant='outline-light' style={{backgroundColor: 'red', width: '40px', height: '40px', margin: '3px'}} onClick={() => setColorCheck(1)}/>
+                    <Form onSubmit={handleSubmit}>
+                        <Form.Group controlId='size' className='d-flex flex-column align-items-start'>
+                                <Form.Label className='fw-bold mt-3'>Size:</Form.Label>
+                                <div className='d-flex flex-wrap justify-content-start gap-4'>
+                                    {Sizes.map((color,index) => {
+                                        return(
+                                        <Button variant='outline-light' className={index === sizeCheck ? 'active' : ''} onClick={() => setSizeCheck(index)} key={index}>{color} CM</Button>
+                                        )
+                                    })}
+                                </div>
+                        </Form.Group>
+                        <Form.Group controlId='color' className='d-flex flex-column align-items-start'>
+                            <Form.Label className='fw-bold mt-3'>Color:</Form.Label>
+                            <div className='d-flex flex-wrap justify-content-start align-items-center gap-4'>
+                                {Colors.map((color,index) => {
+                                    return(
+                                    <div className={index === colorCheck ? 'color__button rounded' : ''} key={index}>
+                                            <Button variant='outline-light' style={{backgroundColor: color, width: '40px', height: '40px', margin: '3px'}} onClick={() => setColorCheck(index)}/>
+                                        </div> 
+                                    )
+                                })}
                             </div>
-                            <div className={2 === colorcheck ? 'color__button rounded' : ''}>
-                                <Button variant='outline-light' style={{backgroundColor: 'blue', width: '40px', height: '40px', margin: '3px'}} onClick={() => setColorCheck(2)}/>
+                        </Form.Group>                        
+                        <Form.Group controlId='backing' className='d-flex flex-column align-items-start'>
+                            <Form.Label className='fw-bold mt-3'>Acrylic Backing Style *:</Form.Label>
+                            <Form.Select aria-label="Default select example" className='w-auto' value={backingCheck} onChange={(e) => setBackingCheck(e.currentTarget.value)}>
+                                <option value="default">Choose Acrylic Backing</option>
+                                <option value="CS">Cut to shape</option>
+                                <option value="SR">Square/Regtangular board</option>
+                                <option value="CL">Cut to letter (+100 AED)</option>
+                            </Form.Select> 
+                        </Form.Group>
+                        <Form.Group controlId='waterproof' className='d-flex flex-column align-items-start'>
+                            <Form.Label className='fw-bold mt-3'>Waterproof *:</Form.Label>
+                            <Form.Select aria-label="Default select example" className='w-auto' value={waterCheck} onChange={(e) => setWaterCheck(e.currentTarget.value)}>
+                                <option value="default">Choose Waterproof</option>
+                                <option value="Y ">Yes (+100 AED)</option>
+                                <option value="N">No</option>
+                            </Form.Select>
+                        </Form.Group>
+                        <Form.Group controlId='dimmer' className='d-flex flex-column align-items-start'>
+                            <Form.Label className='fw-bold mt-3'>Dimmer *:</Form.Label>
+                            <Form.Select aria-label="Default select example" className='w-auto' value={dimmerCheck} onChange={(e) => setDimmerCheck(e.currentTarget.value)}>
+                                <option value="default">Choose Dimmer</option>
+                                <option value="B">Basic Dimmer</option>
+                                <option value="A">Advanced Dimmer (+100 AED)</option>
+                            </Form.Select>
+                        </Form.Group>
+                        <Form.Group controlId='quantity' className='d-flex flex-column align-items-start'>
+                            <Form.Label className='fw-bold mt-3'>Quantity:</Form.Label>
+                            <div className='d-flex align-items-center gap-3 justify-content-between mt-3 border border-light p-2 w-50'>
+                                <AiOutlineMinus size={20} onClick={() => {if(quantity > 1){setQuantity(quantity-1)}}}/>
+                                <h3> {quantity}</h3>
+                                <AiOutlinePlus size={20} onClick={() => {if(quantity < 20){setQuantity(quantity+1)}}}/>
                             </div>
-                            <div className={3 === colorcheck ? 'color__button rounded' : ''}>
-                                <Button variant='outline-light' style={{backgroundColor: 'yellow', width: '40px', height: '40px', margin: '3px'}} onClick={() => setColorCheck(3)}/>
-                            </div>
-                            <div className={4 === colorcheck ? 'color__button rounded' : ''}>
-                                <Button variant='outline-light' style={{backgroundColor: 'purple', width: '40px', height: '40px', margin: '3px'}} onClick={() => setColorCheck(4)}/>
-                            </div>
-                        </div>
-                        <p className='fw-bold mt-3'>Acrylic Backing Style *:</p>
-                        <Form.Select aria-label="Default select example" className='w-auto'>
-                            <option>Choose Acrylic Backing</option>
-                            <option value="1 ">Cut to shape</option>
-                            <option value="2">Square/Regtangular board</option>
-                            <option value="3">Cut to letter (+100 AED)</option>
-                        </Form.Select>
-                        <p className='fw-bold mt-3'>Waterproof *:</p>
-                        <Form.Select aria-label="Default select example" className='w-auto'>
-                            <option>Choose Waterproof</option>
-                            <option value="1 ">Yes (+100 AED)</option>
-                            <option value="2">No</option>
-                        </Form.Select>
-                        <p className='fw-bold mt-3'>Dimmer *:</p>
-                        <Form.Select aria-label="Default select example" className='w-auto'>
-                            <option>Choose Dimmer</option>
-                            <option value="1 ">Basic Dimmer</option>
-                            <option value="2">Advanced Dimmer (+100 AED)</option>
-                        </Form.Select>
-                        <p className='fw-bold mt-3'>Quantity:</p>
-                        <div className='d-flex align-items-center gap-3 justify-content-between mt-3 border border-light p-2 w-50'>
-                            <AiOutlineMinus size={20} onClick={() => {if(quantity !== 0){setQuantity(quantity-1)}}}/>
-                            <h3> {quantity}</h3>
-                            <AiOutlinePlus size={20} onClick={() => {setQuantity(quantity+1)}}/>
-                        </div>
-                        <Button type='submit' variant='info' className='mt-4 w-75 p-3'>Add To Cart</Button>
+                        </Form.Group>                        
+                        <Button type='submit' variant='outline-info' className='mt-4 w-100 p-3 fw-bold'>Add To Cart</Button>
                     </Form>
                 </Col>
-                <Col className='w-50'>
+                <Col className='w-75'>
                     <div className='d-flex flex-column flex-md-row align-items-center gap-3 justify-content-center my-5'>
                         <Button
                             onClick={() => {setFontOpen(false); setDescOpen(true);setShipOpen(false)}}

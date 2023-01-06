@@ -62,10 +62,11 @@
   left: 0;
   transition: 1050ms;
   z-index: 100;
+  border-bottom: 1px solid gray;
 }
 
 .product__image{
-  width: 40%;
+  width: 50%;
 }
 
 .carousel-indicators [data-bs-target] {
@@ -77,6 +78,27 @@
 
 .color__button{
   border: 2px solid white!important;
+}
+
+.cart__num{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 5px;
+  right: 1px;
+  width: 8px;
+  height: 8px;
+  font-size: 10px;
+  color: white;
+  background-color: white;
+  border: 1px solid white;
+  border-radius: 20px;
+}
+
+.cart{
+  display: inline-block;
+  position: relative;
 }
 
 @media screen and (max-width: 768px) {
