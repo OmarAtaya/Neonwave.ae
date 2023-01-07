@@ -7,13 +7,9 @@ import { Helmet } from "react-helmet";
 
 function Home() {
   return (
-    <Container fluid className=''>
+    <Container fluid>
       <Helmet>
         <title>Home - NeonWave</title>
-        <meta
-          name="description"
-          content="Beginner friendly page for learning React Helmet."
-        />
       </Helmet>
       <Row>
         <Slideshow/>

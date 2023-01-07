@@ -3,21 +3,32 @@ import { createContext, useReducer } from "react";
 export const Store = createContext();
 
 const initialState = {
+    userInfo: localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : undefined,
     cart: {
-        cartItems: [],
+        cartItems: localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [],
     }
 };
 
 function reducer(state, action) {
     switch(action.type){
         case 'CART_ADD_ITEM':
-            return{
-                ...state,
-                cart:{
-                    ...state.cart, 
-                    cartItems: [...state.cart.cartItems, action.payload],
-            },
-        };
+        {
+            const newItem = action.payload;
+            const existItem = state.cart.cartItems.find(
+                (item) => ((item._id === newItem._id) && (item.colorCheck === newItem.colorCheck) && (item.sizeCheck === newItem.sizeCheck) && (item.dimmerCheck === newItem.dimmerCheck) && (item.backingCheck === newItem.backingCheck) && (item.waterCheck === newItem.waterCheck))
+            );
+
+            const cartItems = existItem
+            ? state.cart.cartItems.map((item) =>
+                item._id === existItem._id ? newItem : item
+                )
+            : [...state.cart.cartItems, newItem];
+
+            localStorage.setItem('cartItems', JSON.stringify(cartItems)) 
+            return { ...state, cart: { ...state.cart, cartItems } };
+        }
+        case 'USER_SIGNIN':
+            return {...state, userInfo: action.payload}
         default:
             return state;
     }

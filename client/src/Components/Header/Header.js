@@ -12,6 +12,7 @@ function Header() {
     const [search, setSearch] = useState(false);
     const {state: cartState} = useContext(Store);
     const {cart} = cartState;
+    const {userInfo} = cartState;
 
     const changeColor = () => {
         if (window.scrollY >= 35)
@@ -24,6 +25,7 @@ function Header() {
     }
 
     window.addEventListener('scroll', changeColor);
+    
 
     menu ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'auto';
     return (
@@ -31,7 +33,7 @@ function Header() {
             <Container fluid className={`${color ? "background__move" : "background__start w-100"}`}>
                 <Row className='d-flex align-items-center flex-nowrap background'>
                     <Col>
-                        <MdOutlineMenu size={30} color='white' onClick={() => {setMenu(prev => !prev)}}/>
+                        <MdOutlineMenu size={30} color='white' onClick={() => {setMenu(true)}}/>
                     </Col>
                     <Col>
                         <Link to="/">
@@ -39,8 +41,16 @@ function Header() {
                         </Link>
                     </Col>
                     <Col className='d-flex justify-content-center align-items-center gap-3'>
-                        <MdOutlineAccountCircle size={30} color='white'/>
-                        <MdOutlineSearch size={30} color='white' onClick={() => {setSearch(prev => !prev)}}/>
+                        {
+                            userInfo === undefined
+                            ?
+                                <Link to="/account/login">
+                                    <MdOutlineAccountCircle size={30} color='white'/>
+                                </Link>
+                            :
+                                <MdOutlineAccountCircle size={30} color='white'/>
+                        }
+                        <MdOutlineSearch size={30} color='white' onClick={() => {setSearch(!search)}}/>
                         <div className='cart'>
                             <MdOutlineShoppingBag size={30} color='white'/>
                             <div className={cart.cartItems.length > 0 ?'cart__num': "d-none"}></div>
@@ -51,7 +61,7 @@ function Header() {
                 <Row>
                     <div className={search ? 'search__bar active' : 'search__bar'}>
                         <div className='d-flex align-items-center gap-3 mb-4'>
-                            <AiOutlineClose size={30} color='white' onClick={() => {setSearch(prev => !prev)}} className='ms-4'/>
+                            <AiOutlineClose size={30} color='white' onClick={() => {setSearch(false)}} className='ms-4'/>
                             <Form className="d-flex gap-3 align-items-end w-100">
                                 <FormControl
                                     type="text"
@@ -59,7 +69,7 @@ function Header() {
                                     className="bg-black text-white"
                                 />
                                 <Button variant="outline-info">
-                                Search
+                                    Search
                                 </Button>
                             </Form>  
                         </div>
@@ -69,7 +79,7 @@ function Header() {
             </Container>
             <div className={menu ? 'nav__bg' : ''}>
                 <div className={menu ? 'nav__menu active' : 'nav__menu'}>
-                    <AiOutlineClose size={30} color='black' onClick={() => {setMenu(prev => !prev)}} className='ms-4 mb-5'/>
+                    <AiOutlineClose size={30} color='black' onClick={() => {setMenu(false)}} className='ms-4 mb-5'/>
                     <Nav className='ms-4 fs-5'>
                         <Nav.Item className='w-100 border-bottom border-dark mb-3'>
                             <Nav.Link href="/" className='text-black ps-0 py-3'>HOME</Nav.Link>
@@ -86,7 +96,6 @@ function Header() {
                         <Nav.Item className='w-100 border-bottom border-dark mb-3'>
                             <Nav.Link href="/about-us" className='text-black ps-0 py-3'>ABOUT US</Nav.Link>
                         </Nav.Item>
-                        <p className='text-dark'>Account</p>
                     </Nav>
                 </div>  
             </div>              

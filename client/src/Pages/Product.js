@@ -24,23 +24,20 @@ function Product() {
     const [dimmerCheck, setDimmerCheck] = useState('default');
     const [backingCheck, setBackingCheck] = useState('default');
     const [waterCheck, setWaterCheck] = useState('default');
-    const {state: cart, dispatch: ctxDispatch} = useContext(Store);
+    const {state: cartState, dispatch: ctxDispatch} = useContext(Store);
+    const {cart} = cartState;
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleSubmit = () => {
+        const existItem = cart.cartItems.find((x) => x.id === state.id)
+        const quantity = existItem ? existItem.quantity + 1: setQuantity(quantity);
+
         if(backingCheck === 'default' || waterCheck === 'default' || dimmerCheck === 'default')
         {
             alert("Please Complete All Selections")
         }
         else{
+            ctxDispatch({type:'CART_ADD_ITEM', payload: {...state, quantity, sizeCheck, colorCheck, dimmerCheck, backingCheck, waterCheck, Images}})
             navigate('/')
-        }
-    }
-
-    const addToCartHandler = () => {
-        if(backingCheck !== 'default' && waterCheck !== 'default' && dimmerCheck !== 'default')
-        {
-            ctxDispatch({type:'CART_ADD_ITEM', payload: {...state, quantity: quantity}})
         }
     }
     
@@ -48,10 +45,6 @@ function Product() {
         <Container className='mt-5'>
             <Helmet>
                 <title>{state.title} - NeonWave</title>
-                <meta
-                name="description"
-                content="Beginner friendly page for learning React Helmet."
-                />
             </Helmet>
             <Row className='d-flex justify-content-center'>
                 <Carousel className='product__image p-0'>
@@ -130,7 +123,7 @@ function Product() {
                                 <AiOutlinePlus size={20} onClick={() => {if(quantity < 20){setQuantity(quantity+1)}}}/>
                             </div>
                         </Form.Group>                        
-                        <Button type='submit' variant='outline-info' className='mt-4 w-100 p-3 fw-bold' onClick={addToCartHandler}>Add To Cart</Button>
+                        <Button type='submit' variant='outline-info' className='mt-4 w-100 p-3 fw-bold'>Add To Cart</Button>
                     </Form>
                 </Col>
                 <Col className='w-75'>
