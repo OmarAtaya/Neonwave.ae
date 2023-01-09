@@ -2,7 +2,6 @@ import React, {useContext} from 'react';
 import { Container, Row, Button } from 'react-bootstrap';
 import { Store } from '../Store';
 import CartItemBox from '../Components/CartItem/CartItemBox';
-import {Link} from 'react-router-dom'
 
 function CartThree({setCartStep}) {
     const {state: cartState} = useContext(Store);
@@ -32,14 +31,7 @@ function CartThree({setCartStep}) {
                         <CartItemBox cartItem={cartItem} key={index} />
                     )
                 })}
-                {cart.cartItems.length === 0 && 
-                    <div>
-                        <h2 className='text-white'>Your Cart Is Empty</h2>
-                        <Link to='/'>
-                            <Button variant='outline-info'>Continue Shopping</Button>
-                        </Link> 
-                    </div>
-                }
+                {cart.cartItems.length === 0 && setCartStep(0)}
             </Row>
         </Container>
     )

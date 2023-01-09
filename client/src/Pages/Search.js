@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Button, Container, FormControl, Row, Col } from 'react-bootstrap';
+import {Container, FormControl, Row, Col } from 'react-bootstrap';
 import ProductCard from '../Components/ProductCard/ProductCard';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';

@@ -1,35 +1,35 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Button, Container, Row } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+//import { useNavigate } from 'react-router-dom';
 import { Store } from '../Store';
 import CartOne from './CartOne';
 import CartThree from './CartThree';
 import CartTwo from './CartTwo';
 
 function Cart() {
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
     const [total, setTotal] = useState(0);
     const {state: cartState} = useContext(Store);
     const {cart} = cartState;
     const [cartStep, setCartStep] = useState(0);
 
     useEffect(() => {
-      changeTotal()
-    },[cartState])
-    const changeTotal = () => {
-        let newTotal = 0
-        cart.cartItems.forEach(element => {
-            newTotal += element.quantity1 * element.total
-        });
-        setTotal(newTotal)
-    }
+        const changeTotal = () => {
+            let newTotal = 0
+            cart.cartItems.forEach(element => {
+                newTotal += element.quantity1 * element.total
+            });
+            setTotal(newTotal)
+        }
+        changeTotal()
+    },[cartState,cart.cartItems])
+    
     
     const checkoutHandler = () => {
         if(cartStep < 2)
         {
             setCartStep(prev => prev + 1) 
         }
-        
     }
 
     return (

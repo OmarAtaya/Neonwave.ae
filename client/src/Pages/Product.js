@@ -42,32 +42,34 @@ function Product() {
     }
     
     useEffect(() => {
-      changeTotal()
-    }, [backingCheck, waterCheck, dimmerCheck])
+        
+        const changeTotal = () => {
+            let newTotal = 0
+            state.prices.forEach((element, index) => {
+                if(index === sizeCheck)
+                {
+                    newTotal += element
+                    if(dimmerCheck === 'Advanced')
+                    {
+                        newTotal += 100
+                    }
+                    if(backingCheck === 'Cut to letter')
+                    {
+                        newTotal += 100
+                    }
+                    if(waterCheck === 'Yes')
+                    {
+                        newTotal += 100
+                    }
+                }
+            });
+            setTotal(newTotal)
+        }
+        changeTotal()
+    }, [backingCheck, waterCheck, dimmerCheck, sizeCheck, state.prices])
     
 
-    const changeTotal = () => {
-        let newTotal = 0
-        state.prices.forEach((element, index) => {
-            if(index === sizeCheck)
-            {
-                newTotal += element
-                if(dimmerCheck === 'Advanced')
-                {
-                    newTotal += 100
-                }
-                if(backingCheck === 'Cut to letter')
-                {
-                    newTotal += 100
-                }
-                if(waterCheck === 'Yes')
-                {
-                    newTotal += 100
-                }
-            }
-        });
-        setTotal(newTotal)
-    }
+    
 
     return (
         <Container className='mt-5'>
