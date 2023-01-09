@@ -19,4 +19,14 @@ productRouter.get('/:title', async (req,res) => {
     }
 })
 
+productRouter.get('/category/:category', async (req,res) => {
+  const product = await products.filter(x => x.categorys.includes(req.params.category));
+  if(product) {
+    res.send(product);
+  }
+  else {
+    res.status(404).send({ message: 'Product Not Found'})
+  }
+})
+
 module.exports = productRouter;

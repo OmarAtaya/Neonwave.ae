@@ -13,6 +13,10 @@ import Forgot from './Pages/Forgot';
 import Account from './Pages/Account';
 import Cart from './Pages/Cart';
 import Search from './Pages/Search';
+import Shopall from './Pages/Shopall';
+import TextBased from './Pages/TextBased';
+import Anime from './Pages/Anime';
+import Best from './Pages/Best';
 
 function App() {
   return (
@@ -27,6 +31,10 @@ function App() {
           <Route exact path='/account/profile' element={<Account/>}/>
           <Route exact path='/account/register' element={<Register/>}/>
           <Route exact path='/search' element={<Search/>}/>
+          <Route exact path='/collections/shop-all' element={<Shopall/>}/>
+          <Route exact path='/collections/text-based' element={<TextBased/>}/>
+          <Route exact path='/collections/anime' element={<Anime/>}/>
+          <Route exact path='/collections/best-seller' element={<Best/>}/>
           <Route exact path='/product/:slug' element={<Product/>}/>
           <Route exact path='/cart' element={<Cart/>}/>
         </Routes>

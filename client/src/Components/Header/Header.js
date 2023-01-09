@@ -2,7 +2,7 @@ import React, {useState,useContext} from 'react';
 import { Container, Row, Col, Image, Nav, Form, FormControl, Button } from 'react-bootstrap';
 import Logo from '../../assets/Neon_Wave_3_165x.png';
 import { MdOutlineMenu, MdOutlineShoppingBag, MdOutlineAccountCircle, MdOutlineSearch} from 'react-icons/md';
-import {AiOutlineClose} from 'react-icons/ai';
+import {AiOutlineClose, AiOutlineDown} from 'react-icons/ai';
 import { Store } from '../../Store';
 import { Link } from 'react-router-dom';
 
@@ -10,6 +10,7 @@ function Header() {
     const [color, setColor] = useState(false);
     const [menu, setMenu] = useState(false);
     const [search, setSearch] = useState(false);
+    const [collection, setCollection] = useState(false);
     const [searchText, setSearchText] = useState('');
     const {state: cartState} = useContext(Store);
     const {cart} = cartState;
@@ -84,13 +85,25 @@ function Header() {
             </Container>
             <div className={menu ? 'nav__bg' : ''}>
                 <div className={menu ? 'nav__menu active' : 'nav__menu'}>
-                    <AiOutlineClose size={30} color='black' onClick={() => {setMenu(false)}} className='ms-4 mb-5'/>
+                    <AiOutlineClose size={30} color='black' onClick={() => {setMenu(false);setCollection(false)}} className='ms-4 mb-5'/>
                     <Nav className='ms-4 fs-5'>
                         <Nav.Item className='w-100 border-bottom border-dark mb-3'>
                             <Nav.Link href="/" className='text-black ps-0 py-3'>HOME</Nav.Link>
                         </Nav.Item>
-                        <Nav.Item className='w-100 border-bottom border-dark mb-3'>
-                            <Nav.Link href="/best-sellers" className='text-black ps-0 py-3'>BESTSELLER</Nav.Link>
+                        <Nav.Item className='w-100 border-bottom border-dark mb-3' style={{transition: '2000 ease-in'}}>
+                            <div className='d-flex justify-content-between align-items-center me-3' onClick={() => setCollection(prev => !prev)}>
+                               <Nav.Link className='text-black ps-0 py-3'>COLLECTIONS</Nav.Link>
+                               <AiOutlineDown size={25} color='black'/>
+                            </div>
+                            
+                            {collection &&
+                                <div>
+                                    <Nav.Link href="/collections/shop-all" className='text-dark ps-3 py-3'>SHOP ALL</Nav.Link>
+                                    <Nav.Link href="/collections/best-seller" className='text-dark ps-3 py-3'>BEST SELLER</Nav.Link>
+                                    <Nav.Link href="/collections/text-based" className='text-dark ps-3 py-3'>TEXT BASED</Nav.Link>
+                                    <Nav.Link href="/collections/anime" className='text-dark ps-3 py-2'>ANIME</Nav.Link>
+                                </div>
+                            }
                         </Nav.Item>
                         <Nav.Item className='w-100 border-bottom border-dark mb-3'>
                             <Nav.Link href="/customize-your-own-neon" className='text-black ps-0 py-3'>CUSTOM NEON SIGNS</Nav.Link>
