@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { Container, Carousel, Image, Row, Button, Form, Col, Collapse } from 'react-bootstrap';
 import Sign from '../assets/Sign.png';
 import Package from '../assets/Package.png';
@@ -6,15 +6,12 @@ import Wire from '../assets/Wire.png';
 import Backing from '../assets/Backing.jpg';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { Store } from '../Store';
 
 function Product() {
     const navigate = useNavigate();
     const {state} = useLocation();
-    const [Images, setImages] = useState(state.images);
-    const [Sizes, setSizes] = useState(state.sizes);
-    const [Colors, setColors] = useState(state.colors);
     const [quantity, setQuantity] = useState(1);
     const [descOpen, setDescOpen] = useState(true);
     const [fontOpen, setFontOpen] = useState(false);
@@ -22,25 +19,56 @@ function Product() {
     const [sizeCheck, setSizeCheck] = useState(0);
     const [colorCheck, setColorCheck] = useState(0);
     const [dimmerCheck, setDimmerCheck] = useState('default');
+    const [total, setTotal] = useState(0);
     const [backingCheck, setBackingCheck] = useState('default');
     const [waterCheck, setWaterCheck] = useState('default');
     const {state: cartState, dispatch: ctxDispatch} = useContext(Store);
     const {cart} = cartState;
-
-    const handleSubmit = () => {
-        const existItem = cart.cartItems.find((x) => x.id === state.id)
-        const quantity = existItem ? existItem.quantity + 1: setQuantity(quantity);
-
+    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const existItem = cart.cartItems.find(
+                (item) => ((item._id === state._id) && (item.colorCheck === colorCheck) && (item.sizeCheck === sizeCheck) && (item.dimmerCheck === dimmerCheck) && (item.backingCheck === backingCheck) && (item.waterCheck === waterCheck))
+            );
+        const quantity1 = existItem ? existItem.quantity1 + 1 : quantity;
         if(backingCheck === 'default' || waterCheck === 'default' || dimmerCheck === 'default')
         {
             alert("Please Complete All Selections")
         }
         else{
-            ctxDispatch({type:'CART_ADD_ITEM', payload: {...state, quantity, sizeCheck, colorCheck, dimmerCheck, backingCheck, waterCheck, Images}})
+            ctxDispatch({type:'CART_ADD_ITEM', payload: {...state, quantity1, sizeCheck, colorCheck, dimmerCheck, backingCheck, waterCheck, total}})
             navigate('/')
         }
     }
+    window.scrollTo(0, 0)
+    useEffect(() => {
+      changeTotal()
+    }, [backingCheck, waterCheck, dimmerCheck])
     
+
+    const changeTotal = () => {
+        let newTotal = 0
+        state.prices.forEach((element, index) => {
+            if(index === sizeCheck)
+            {
+                newTotal += element
+                if(dimmerCheck === 'Advanced')
+                {
+                    newTotal += 100
+                }
+                if(backingCheck === 'Cut to letter')
+                {
+                    newTotal += 100
+                }
+                if(waterCheck === 'Yes')
+                {
+                    newTotal += 100
+                }
+            }
+        });
+        setTotal(newTotal)
+    }
+
     return (
         <Container className='mt-5'>
             <Helmet>
@@ -48,7 +76,7 @@ function Product() {
             </Helmet>
             <Row className='d-flex justify-content-center'>
                 <Carousel className='product__image p-0'>
-                    {Images.map((slide,index) => {
+                    {state.images.map((slide,index) => {
                         return(
                             <Carousel.Item className='w-100' key={index}>
                                 <Image src={slide} alt='' className='product__image'/>
@@ -60,20 +88,20 @@ function Product() {
             <h2 className='text-info'>{state.title}</h2>
             {state.prices.map((price,index) => {
                 return index === sizeCheck ? 
-                <h4 className='text-white fw-bold'>{price} AED</h4> 
+                <h4 className='text-white fw-bold' key={index}>{price} AED</h4>
                 : 
                 ''
                 
             })}
-            <Row className='text-white d-flex align-items-start gap-3 mt-5'>
-                <Col className='w-50'>
+            <Row className='text-white d-flex flex-column flex-md-row align-items-md-start gap-3 mt-5'>
+                <Col>
                     <Form onSubmit={handleSubmit}>
                         <Form.Group controlId='size' className='d-flex flex-column align-items-start'>
                                 <Form.Label className='fw-bold mt-3'>Size:</Form.Label>
                                 <div className='d-flex flex-wrap justify-content-start gap-4'>
-                                    {Sizes.map((color,index) => {
+                                    {state.sizes.map((color,index) => {
                                         return(
-                                        <Button variant='outline-light' className={index === sizeCheck ? 'active' : ''} onClick={() => setSizeCheck(index)} key={index}>{color} CM</Button>
+                                        <Button type='button' variant='outline-light' className={index === sizeCheck ? 'active' : ''} onClick={() => setSizeCheck(index)} key={index}>{color} CM</Button>
                                         )
                                     })}
                                 </div>
@@ -81,10 +109,10 @@ function Product() {
                         <Form.Group controlId='color' className='d-flex flex-column align-items-start'>
                             <Form.Label className='fw-bold mt-3'>Color:</Form.Label>
                             <div className='d-flex flex-wrap justify-content-start align-items-center gap-4'>
-                                {Colors.map((color,index) => {
+                                {state.colors.map((color,index) => {
                                     return(
                                     <div className={index === colorCheck ? 'color__button rounded' : ''} key={index}>
-                                            <Button variant='outline-light' style={{backgroundColor: color, width: '40px', height: '40px', margin: '3px'}} onClick={() => setColorCheck(index)}/>
+                                            <Button type='button' variant='outline-light' style={{backgroundColor: color, width: '40px', height: '40px', margin: '3px'}} onClick={() => setColorCheck(index)}/>
                                         </div> 
                                     )
                                 })}
@@ -94,25 +122,25 @@ function Product() {
                             <Form.Label className='fw-bold mt-3'>Acrylic Backing Style *:</Form.Label>
                             <Form.Select aria-label="Default select example" className='w-auto' value={backingCheck} onChange={(e) => setBackingCheck(e.currentTarget.value)}>
                                 <option value="default">Choose Acrylic Backing</option>
-                                <option value="CS">Cut to shape</option>
-                                <option value="SR">Square/Regtangular board</option>
-                                <option value="CL">Cut to letter (+100 AED)</option>
+                                <option value="Cut to shape">Cut to shape</option>
+                                <option value="Square/Regtangular">Square/Regtangular board</option>
+                                <option value="Cut to letter">Cut to letter (+100 AED)</option>
                             </Form.Select> 
                         </Form.Group>
                         <Form.Group controlId='waterproof' className='d-flex flex-column align-items-start'>
                             <Form.Label className='fw-bold mt-3'>Waterproof *:</Form.Label>
                             <Form.Select aria-label="Default select example" className='w-auto' value={waterCheck} onChange={(e) => setWaterCheck(e.currentTarget.value)}>
                                 <option value="default">Choose Waterproof</option>
-                                <option value="Y ">Yes (+100 AED)</option>
-                                <option value="N">No</option>
+                                <option value="Yes">Yes (+100 AED)</option>
+                                <option value="No">No</option>
                             </Form.Select>
                         </Form.Group>
                         <Form.Group controlId='dimmer' className='d-flex flex-column align-items-start'>
                             <Form.Label className='fw-bold mt-3'>Dimmer *:</Form.Label>
                             <Form.Select aria-label="Default select example" className='w-auto' value={dimmerCheck} onChange={(e) => setDimmerCheck(e.currentTarget.value)}>
                                 <option value="default">Choose Dimmer</option>
-                                <option value="B">Basic Dimmer</option>
-                                <option value="A">Advanced Dimmer (+100 AED)</option>
+                                <option value="Basic">Basic Dimmer</option>
+                                <option value="Advanced">Advanced Dimmer (+100 AED)</option>
                             </Form.Select>
                         </Form.Group>
                         <Form.Group controlId='quantity' className='d-flex flex-column align-items-start'>
@@ -126,9 +154,10 @@ function Product() {
                         <Button type='submit' variant='outline-info' className='mt-4 w-100 p-3 fw-bold'>Add To Cart</Button>
                     </Form>
                 </Col>
-                <Col className='w-75'>
+                <Col>
                     <div className='d-flex flex-column flex-md-row align-items-center gap-3 justify-content-center my-5'>
                         <Button
+                            type='button'
                             onClick={() => {setFontOpen(false); setDescOpen(true);setShipOpen(false)}}
                             aria-controls="description"
                             variant='outline-info'
@@ -138,6 +167,7 @@ function Product() {
                             DESCRIPTION
                         </Button>
                         <Button
+                            type='button'
                             onClick={() => {setFontOpen(true); setDescOpen(false);setShipOpen(false)}}
                             aria-controls="font"
                             variant='outline-info'
@@ -147,6 +177,7 @@ function Product() {
                             FONTS/PRODUCT
                         </Button>
                         <Button
+                            type='button'
                             onClick={() => {setFontOpen(false); setDescOpen(false);setShipOpen(true)}}
                             aria-controls="shipping"
                             variant='outline-info'

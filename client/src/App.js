@@ -10,6 +10,8 @@ import Register from './Pages/Register';
 import Header from './Components/Header/Header';
 import Free from './Components/Free/Free';
 import Forgot from './Pages/Forgot';
+import Account from './Pages/Account';
+import Cart from './Pages/Cart';
 
 function App() {
   return (
@@ -21,8 +23,10 @@ function App() {
           <Route exact path='/' element={<Home/>}/>
           <Route exact path='/account/login' element={<Login/>}/>
           <Route exact path='/account/forgot' element={<Forgot/>}/>
+          <Route exact path='/account/profile' element={<Account/>}/>
           <Route exact path='/account/register' element={<Register/>}/>
           <Route exact path='/product/:slug' element={<Product/>}/>
+          <Route exact path='/cart' element={<Cart/>}/>
         </Routes>
       </Router>
       <hr className='text-light mt-3'/>

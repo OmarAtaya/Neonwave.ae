@@ -12,6 +12,7 @@ function Login() {
     const navigate = useNavigate();
     const { state: userInfo, dispatch: ctxDispatch } = useContext(Store);
 
+    window.scrollTo(0, 0)
     const submitHandler = async (e) => {
         e.preventDefault();
         try {
@@ -32,7 +33,7 @@ function Login() {
                     <title>Login - NeonWave</title>
             </Helmet>
             <Col className='h-100 d-flex flex-column justify-content-center align-items-center gap-2'>
-                <Form className='d-flex flex-column gap-4 w-25' onSubmit={submitHandler}>
+                <Form className='d-flex flex-column gap-4 login__width' onSubmit={submitHandler}>
                     {
                         error 
                         && 

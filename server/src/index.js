@@ -6,7 +6,12 @@ const port = 5000
 const mongoose = require("mongoose")
 const dotenv = require("dotenv")
 const data = require('./data/Products.js')
-const {userRouter} = require('./routes/userRoutes')
+const {userRouter} = require('./routes/userRoutes.js')
+const seedRouter = require('./routes/seedRoutes.js')
+const productRouter = require('./routes/productRoutes.js')
+const {orderRouter} = require('./routes/orderRoutes.js')
+const checkOutSessions = require('./functions/checkoutSession')
+
 
 dotenv.config();
 mongoose.set('strictQuery', false);
@@ -18,8 +23,11 @@ console.log(err.message)
 })
 app.use(express.json())
 app.use(cors())
-app.use(express.urlencoded({extended: true}))
+app.use('/api/seed', seedRouter);
+app.use('/api/products', productRouter)
+app.use('/api/orders', orderRouter)
 app.use('/api/users', userRouter)
+app.use(express.urlencoded({extended: true}))
 
 app.use((err, req, res, next) => {
     res.status(500).send({message: err.message});
@@ -29,6 +37,7 @@ app.get('/api/products', (req, res) => {
     res.send(data.products)
 })
 
+app.post('/create-checkout-session', checkOutSessions)
 
 
 app.listen(port, () => {

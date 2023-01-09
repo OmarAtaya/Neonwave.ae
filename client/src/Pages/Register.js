@@ -10,7 +10,8 @@ function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
-
+    
+    window.scrollTo(0, 0)
     const submitHandler = async (e) => {
         e.preventDefault();
         try {
@@ -30,7 +31,7 @@ function Register() {
                 <title>Register - NeonWave</title>
             </Helmet>
             <Col className='h-100 d-flex flex-column justify-content-center align-items-center gap-2'>
-                <Form className='d-flex flex-column gap-4 w-25' onSubmit={submitHandler}>
+                <Form className='d-flex flex-column gap-4 login__width' onSubmit={submitHandler}>
                     {
                         error 
                         && 

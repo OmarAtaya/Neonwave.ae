@@ -105,6 +105,14 @@
   color: white!important;
 }
 
+.login__width{
+  width: 25%;
+}
+
+.cart__width{
+  width: 50%!important;
+}
+
 @media screen and (max-width: 768px) {
   .product__card{
     width: 50%!important;
@@ -112,6 +120,14 @@
 
   .product__image{
     width: 100%;
+  }
+
+  .login__width{
+    width: 60%;
+  }
+
+  .cart__width{
+    width: 100%!important;
   }
 
   .nav__menu{

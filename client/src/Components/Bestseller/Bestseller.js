@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { Button, Container, Row, Col } from 'react-bootstrap';
-import axios from 'axios'
+import Axios from 'axios'
 import ProductCard from '../ProductCard/ProductCard';
 
 function Bestseller() {
@@ -8,7 +8,7 @@ function Bestseller() {
 
     useEffect(() => {
       const fetchProducts = async () => {
-        const result = await axios.get('/api/products');
+        const result = await Axios.get('http://localhost:5000/api/products/');
         setProducts(result.data)
       }
       fetchProducts()

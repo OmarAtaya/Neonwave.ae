@@ -3,13 +3,14 @@ import { Container, Form, Col, FormControl, Button } from 'react-bootstrap';
 import { Helmet } from "react-helmet";
 
 function Forgot() {
+    window.scrollTo(0, 0)
   return (
     <Container className='vh-100'>
         <Helmet>
             <title>Forgot Password - NeonWave</title>
         </Helmet>
         <Col className='h-100 d-flex flex-column justify-content-center align-items-center gap-2'>
-            <Form className='d-flex flex-column gap-4 w-25'>
+            <Form className='d-flex flex-column gap-4 login__width'>
                 <Form.Group className='d-flex flex-column'>
                     <Form.Text className='fs-5 text-info fst-italic' style={{letterSpacing: '3px'}}>RECOVER PASSWORD</Form.Text>
                     <Form.Text className='fs-6 text-white'>Please enter your email:</Form.Text>

@@ -48,14 +48,15 @@ function Header() {
                                     <MdOutlineAccountCircle size={30} color='white'/>
                                 </Link>
                             :
-                                <MdOutlineAccountCircle size={30} color='white'/>
+                                <Link to="/account/profile">
+                                    <MdOutlineAccountCircle size={30} color='white'/>
+                                </Link>
                         }
                         <MdOutlineSearch size={30} color='white' onClick={() => {setSearch(!search)}}/>
-                        <div className='cart'>
+                        <Link to='/cart' className='cart'>
                             <MdOutlineShoppingBag size={30} color='white'/>
                             <div className={cart.cartItems.length > 0 ?'cart__num': "d-none"}></div>
-                        </div>
-                        
+                        </Link>
                     </Col> 
                 </Row>
                 <Row>

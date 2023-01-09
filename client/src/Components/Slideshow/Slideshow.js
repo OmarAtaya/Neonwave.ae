@@ -3,6 +3,7 @@ import { Button, Carousel, Image } from 'react-bootstrap';
 import Slide1 from '../../assets/Slide1.jpg';
 import Slide2 from '../../assets/Slide2.jpg';
 import Slide3 from '../../assets/Slide3.jpg';
+import Slide4 from '../../assets/Slide4.jpg';
 
 function Slideshow() {
     const [Images, setImages] = useState([])
@@ -15,7 +16,12 @@ function Slideshow() {
                     url: Slide2,
                     caption: "ENDEVER IN AN ARRAY OF NEON",
                     size: "w-100"
-                }
+                },
+                {
+                    url: Slide4,
+                    caption: "LET US LIGHT UP YOUR WORLD",
+                    size: "w-100"
+                },
             ])
         } 
         else
