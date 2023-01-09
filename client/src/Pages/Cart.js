@@ -16,7 +16,6 @@ function Cart() {
     useEffect(() => {
       changeTotal()
     },[cartState])
-    window.scrollTo(0, 0)
     const changeTotal = () => {
         let newTotal = 0
         cart.cartItems.forEach(element => {

@@ -8,7 +8,6 @@ function Account() {
     const {userInfo} = cartState;
     const navigate = useNavigate();
 
-    window.scrollTo(0, 0)
     const handleLogout = () => {
         ctxDispatch( {type: 'USER_SIGNOUT'})
         localStorage.removeItem('userInfo')

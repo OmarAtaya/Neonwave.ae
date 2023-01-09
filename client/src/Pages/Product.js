@@ -40,7 +40,7 @@ function Product() {
             navigate('/')
         }
     }
-    window.scrollTo(0, 0)
+    
     useEffect(() => {
       changeTotal()
     }, [backingCheck, waterCheck, dimmerCheck])

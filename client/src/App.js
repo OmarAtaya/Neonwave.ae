@@ -17,11 +17,13 @@ import Shopall from './Pages/Shopall';
 import TextBased from './Pages/TextBased';
 import Anime from './Pages/Anime';
 import Best from './Pages/Best';
+import ScrollToTop from './ScrollToTop';
 
 function App() {
   return (
     <div className="App">
       <Router>
+        <ScrollToTop/>
         <Free/>
         <Header/>
         <Routes>

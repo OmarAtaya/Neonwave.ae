@@ -12,7 +12,6 @@ function Login() {
     const navigate = useNavigate();
     const { state: userInfo, dispatch: ctxDispatch } = useContext(Store);
 
-    window.scrollTo(0, 0)
     const submitHandler = async (e) => {
         e.preventDefault();
         try {

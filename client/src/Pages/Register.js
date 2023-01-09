@@ -11,7 +11,6 @@ function Register() {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
     
-    window.scrollTo(0, 0)
     const submitHandler = async (e) => {
         e.preventDefault();
         try {

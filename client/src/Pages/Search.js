@@ -25,7 +25,6 @@ function Search() {
             }
         }
     }, [searchText])
-    window.scrollTo(0, 0)
     return (
         <Container className='mt-5' style={{height: 'fit-content', minHeight: '100vh'}}>
             <Row className='d-flex flex-column align-items-center py-5'>

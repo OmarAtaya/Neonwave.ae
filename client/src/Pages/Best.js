@@ -22,7 +22,6 @@ function Best() {
     }, [])
     const currentRecords = products.slice(indexOfFirstRecord, indexOfLastRecord);
     const nPages = Math.ceil(products.length / recordsPerPage);
-    window.scrollTo(0, 0)
     return (
         <Container className='mt-5' style={{height: 'fit-content', minHeight: '100vh'}}>
             <Row className='p-5'>

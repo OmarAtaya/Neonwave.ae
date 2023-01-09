@@ -6,7 +6,6 @@ import Slideshow from '../Components/Slideshow/Slideshow';
 import { Helmet } from "react-helmet-async";
 
 function Home() {
-  window.scrollTo(0, 0)
   return (
     <Container fluid>
       <Helmet>

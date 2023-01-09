@@ -3,7 +3,6 @@ import { Container, Form, Col, FormControl, Button } from 'react-bootstrap';
 import { Helmet } from "react-helmet";
 
 function Forgot() {
-    window.scrollTo(0, 0)
   return (
     <Container className='vh-100'>
         <Helmet>
