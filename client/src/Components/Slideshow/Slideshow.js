@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { Button, Carousel, Image } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import Slide1 from '../../assets/Slide1.jpg';
 import Slide2 from '../../assets/Slide2.jpg';
 import Slide3 from '../../assets/Slide3.jpg';
@@ -53,7 +54,9 @@ function Slideshow() {
                         <Image src={slide.url} alt='' className={slide.size} style={{filter: 'brightness(60%)'}}/>
                         <Carousel.Caption className='d-flex flex-column align-items-center align-items-md-start justify-content-start fw-bold mb-5'>
                             <h3>{slide.caption}</h3>
-                            <Button variant='outline-info' className='w-auto fw-bold' style={{borderWidth: '2px'}}><h4>SHOP NOW</h4></Button>
+                            <Link to='/collections/shop-all'>
+                                <Button variant='outline-info' className='w-auto fw-bold' style={{borderWidth: '2px'}}><h4>SHOP NOW</h4></Button>
+                            </Link>
                         </Carousel.Caption>
                     </Carousel.Item>
                 )

@@ -22,11 +22,12 @@ function Bestseller() {
             </Row>
             <Row xs={2} md={4}>
                 {products.map((product, index) => {
-                    return(
-                        <Col className="mb-5" key={index}>
+                    return index < 4
+                    ?   <Col className="mb-5" key={index}>
                             <ProductCard product={product}/>
                         </Col>
-                    )
+                    :   ''
+                    
                 })}
             </Row>
             <Row>

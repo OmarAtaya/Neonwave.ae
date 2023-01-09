@@ -2,9 +2,14 @@ import React, {useEffect, useState} from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import ProductCard from '../Components/ProductCard/ProductCard';
+import Paginat from '../Components/Pagination/Paginat';
 
 function Best() {
     const [products, setProducts] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [recordsPerPage] = useState(16);
+    const indexOfLastRecord = currentPage * recordsPerPage;
+    const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
     useEffect(() => {
         fetchData()
         async function fetchData() {
@@ -15,20 +20,29 @@ function Best() {
             }   
         }
     }, [])
+    const currentRecords = products.slice(indexOfFirstRecord, indexOfLastRecord);
+    const nPages = Math.ceil(products.length / recordsPerPage);
     window.scrollTo(0, 0)
     return (
         <Container className='mt-5' style={{height: 'fit-content', minHeight: '100vh'}}>
             <Row className='p-5'>
-                <h4 className='text-info fw-bold'>TEXT BASED</h4>
+                <h4 className='text-info fw-bold'>BEST SELLER</h4>
             </Row>
-            <Row xs={2} md={4} className='d-flex justify-content-center'>
-                {products.map((product, index) => {
+            <Row xs={2} md={4} className='d-flex justify-content-start'>
+                {currentRecords.map((product, index) => {
                     return(
                         <Col className="mb-5" key={index}>
                             <ProductCard product={product}/>
                         </Col>
                     )
                 })}
+            </Row>
+            <Row>
+                <Paginat
+                    nPages = { nPages }
+                    currentPage = { currentPage } 
+                    setCurrentPage = { setCurrentPage }
+                />
             </Row>
         </Container>
     )

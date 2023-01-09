@@ -1,5 +1,6 @@
 import React from 'react';
 import { Col, Container, Row, Image,Card, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import InfoImg from '../../assets/Info.jpg'
 
 function Info() {
@@ -22,7 +23,9 @@ function Info() {
                             <Card.Text>
                             Affordable, aesthetic and superior quality, that's what we're all about.  
                             </Card.Text>
-                            <Button variant='outline-light' className='w-auto' style={{borderWidth: '1px'}}>Shop Our Collection</Button>
+                            <Link to='/collections/shop-all'>
+                                <Button variant='outline-light' className='w-auto' style={{borderWidth: '1px'}}>Shop All</Button>
+                            </Link>
                         </Card.Body>
                     </Card>
                 </Col>

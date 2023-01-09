@@ -33,10 +33,6 @@ app.use((err, req, res, next) => {
     res.status(500).send({message: err.message});
 })
 
-app.get('/api/products', (req, res) => {
-    res.send(data.products)
-})
-
 app.post('/create-checkout-session', checkOutSessions)
 
 
