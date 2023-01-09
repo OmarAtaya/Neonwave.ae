@@ -12,6 +12,7 @@ import Free from './Components/Free/Free';
 import Forgot from './Pages/Forgot';
 import Account from './Pages/Account';
 import Cart from './Pages/Cart';
+import Search from './Pages/Search';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route exact path='/account/forgot' element={<Forgot/>}/>
           <Route exact path='/account/profile' element={<Account/>}/>
           <Route exact path='/account/register' element={<Register/>}/>
+          <Route exact path='/search' element={<Search/>}/>
           <Route exact path='/product/:slug' element={<Product/>}/>
           <Route exact path='/cart' element={<Cart/>}/>
         </Routes>

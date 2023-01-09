@@ -10,6 +10,7 @@ function Header() {
     const [color, setColor] = useState(false);
     const [menu, setMenu] = useState(false);
     const [search, setSearch] = useState(false);
+    const [searchText, setSearchText] = useState('');
     const {state: cartState} = useContext(Store);
     const {cart} = cartState;
     const {userInfo} = cartState;
@@ -67,11 +68,14 @@ function Header() {
                                 <FormControl
                                     type="text"
                                     placeholder="Enter Item Name"
+                                    onChange={(e) => setSearchText(e.currentTarget.value)}
                                     className="bg-black text-white"
                                 />
-                                <Button variant="outline-info">
-                                    Search
-                                </Button>
+                                <Link to='/search' state={searchText}>
+                                    <Button variant="outline-info" onClick={() => setSearch(false)}>
+                                        Search
+                                    </Button>
+                                </Link>
                             </Form>  
                         </div>
                         
