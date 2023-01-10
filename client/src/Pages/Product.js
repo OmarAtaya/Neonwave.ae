@@ -192,10 +192,10 @@ function Product() {
                     
                     <Collapse in={descOpen}>
                         <div id="description" className='text-start'>
-                            <h5 className='text-info'>'F3' Neon sign </h5>
+                            <h5 className='text-info'>{state.title} </h5>
                             <p>Our attention capturing, insanely high quality custom neon signs are all made by hand, regardless of whether you choose from our collection of pre-set designs or  fully customize your own.</p>
                             <p>Our neon signs turn heads by creating a vibe in any room and setup.</p>
-                            <p>This sign is available in 10 sizes from 30cm up to 300 cm wide.</p>
+                            <p>This sign is available in {state.sizes.length} sizes</p>
                             <p>- View our size guide here</p>
                             <p>Our neon signs are available on our website in 9 different color options. More color options can be provided at request by contacting us via Email or WhatsApp.</p>
                             <h4 className='mt-4 text-info'>MATERIALS/GUARANTEE</h4>

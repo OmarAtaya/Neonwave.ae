@@ -83,40 +83,38 @@ function Header() {
                     </div>
                 </Row>
             </Container>
-            <div className={menu ? 'nav__bg' : ''}>
-                <div className={menu ? 'nav__menu active' : 'nav__menu'}>
-                    <AiOutlineClose size={30} color='black' onClick={() => {setMenu(false);setCollection(false)}} className='ms-4 mb-5'/>
-                    <Nav className='ms-4 fs-5'>
-                        <Nav.Item className='w-100 border-bottom border-dark mb-3'>
-                            <Nav.Link href="/" className='text-black ps-0 py-3'>HOME</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item className='w-100 border-bottom border-dark mb-3' style={{transition: '2000 ease-in'}}>
-                            <div className='d-flex justify-content-between align-items-center me-3' onClick={() => setCollection(prev => !prev)}>
-                               <Nav.Link className='text-black ps-0 py-3'>COLLECTIONS</Nav.Link>
-                               <AiOutlineDown size={25} color='black'/>
+            <div className={menu ? 'nav__menu active' : 'nav__menu'}>
+                <AiOutlineClose size={30} color='black' onClick={() => {setMenu(false);setCollection(false)}} className='ms-4 mb-4'/>
+                <Nav className='ms-4 fs-5'>
+                    <Nav.Item className='w-100 border-bottom border-dark mb-3'>
+                        <Nav.Link href="/" className='text-black ps-0 pb-3'>HOME</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item className='w-100 border-bottom border-dark mb-3' style={{transition: '2000 ease-in'}}>
+                        <div className='d-flex justify-content-between align-items-center me-3' onClick={() => setCollection(prev => !prev)}>
+                            <Nav.Link className='text-black ps-0 py-3'>COLLECTIONS</Nav.Link>
+                            <AiOutlineDown size={25} color='black'/>
+                        </div>
+                        
+                        {collection &&
+                            <div>
+                                <Nav.Link href="/collections/shop-all" className='text-dark ps-3 py-2'>SHOP ALL</Nav.Link>
+                                <Nav.Link href="/collections/best-seller" className='text-dark ps-3 py-2'>BEST SELLER</Nav.Link>
+                                <Nav.Link href="/collections/text-based" className='text-dark ps-3 py-2'>TEXT BASED</Nav.Link>
+                                <Nav.Link href="/collections/anime" className='text-dark ps-3 py-2'>ANIME</Nav.Link>
                             </div>
-                            
-                            {collection &&
-                                <div>
-                                    <Nav.Link href="/collections/shop-all" className='text-dark ps-3 py-3'>SHOP ALL</Nav.Link>
-                                    <Nav.Link href="/collections/best-seller" className='text-dark ps-3 py-3'>BEST SELLER</Nav.Link>
-                                    <Nav.Link href="/collections/text-based" className='text-dark ps-3 py-3'>TEXT BASED</Nav.Link>
-                                    <Nav.Link href="/collections/anime" className='text-dark ps-3 py-2'>ANIME</Nav.Link>
-                                </div>
-                            }
-                        </Nav.Item>
-                        <Nav.Item className='w-100 border-bottom border-dark mb-3'>
-                            <Nav.Link href="/customize-your-own-neon" className='text-black ps-0 py-3'>CUSTOM NEON SIGNS</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item className='w-100 border-bottom border-dark mb-3'>
-                            <Nav.Link href="/contact-us" className='text-black ps-0 py-3'>CONTACT US</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item className='w-100 border-bottom border-dark mb-3'>
-                            <Nav.Link href="/about-us" className='text-black ps-0 py-3'>ABOUT US</Nav.Link>
-                        </Nav.Item>
-                    </Nav>
-                </div>  
-            </div>              
+                        }
+                    </Nav.Item>
+                    <Nav.Item className='w-100 border-bottom border-dark mb-3'>
+                        <Nav.Link href="/custom" className='text-black ps-0 py-3'>CUSTOM NEON SIGNS</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item className='w-100 border-bottom border-dark mb-3'>
+                        <Nav.Link href="/contact-us" className='text-black ps-0 py-3'>CONTACT US</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item className='w-100 border-bottom border-dark mb-3'>
+                        <Nav.Link href="/about-us" className='text-black ps-0 py-3'>ABOUT US</Nav.Link>
+                    </Nav.Item>
+                </Nav>
+            </div>  
         </div>
     )
 }

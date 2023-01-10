@@ -24,10 +24,10 @@ function Footer() {
                 <p>QUICK LINKS</p>
                 <ListGroup>
                     <ListGroup.Item className='border-0 bg-black text-white' action href="/contact-us">Contact Us</ListGroup.Item>
-                    <ListGroup.Item className='border-0 bg-black text-white' action href="/font-product-size">Fonts/Product/Size Guide</ListGroup.Item>
-                    <ListGroup.Item className='border-0 bg-black text-white' action href="/faq">FAQs</ListGroup.Item>
-                    <ListGroup.Item className='border-0 bg-black text-white' action href="/size">Size Guide</ListGroup.Item>
-                    <ListGroup.Item className='border-0 bg-black text-white' action href="/shipping-return">Shipping/Returns</ListGroup.Item>
+                    <ListGroup.Item className='border-0 bg-black text-white' action href="/fonts-product-size-guide">Fonts/Product/Size Guide</ListGroup.Item>
+                    <ListGroup.Item className='border-0 bg-black text-white' action href="/faqs">FAQs</ListGroup.Item>
+                    <ListGroup.Item className='border-0 bg-black text-white' action href="/size-guide">Size Guide</ListGroup.Item>
+                    <ListGroup.Item className='border-0 bg-black text-white' action href="/shipping-returns">Shipping/Returns</ListGroup.Item>
                 </ListGroup>
             </Col>
             <Col className='text-start'>

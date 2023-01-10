@@ -20,6 +20,11 @@ import Best from './Pages/Best';
 import ScrollToTop from './ScrollToTop';
 import Contact from './Pages/Contact';
 import About from './Pages/About';
+import Fonts from './Pages/Fonts';
+import FAQ from './Pages/FAQ';
+import Size from './Pages/Size';
+import Shipping from './Pages/Shipping';
+import Custom from './Pages/Custom';
 
 function App() {
   return (
@@ -43,6 +48,11 @@ function App() {
           <Route exact path='/contact-us' element={<Contact/>}/>
           <Route exact path='/about-us' element={<About/>}/>
           <Route exact path='/cart' element={<Cart/>}/>
+          <Route exact path='/fonts-product-size-guide' element={<Fonts/>}/>
+          <Route exact path='/faqs' element={<FAQ/>}/>
+          <Route exact path='/size-guide' element={<Size/>}/>
+          <Route exact path='/shipping-returns' element={<Shipping/>}/>
+          <Route exact path='/custom' element={<Custom/>}/>
         </Routes>
       </Router>
       <hr className='text-light mt-3'/>
