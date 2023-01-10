@@ -4,7 +4,7 @@
 }
 
 .background{
-  background-color: #25a9c8;
+  background-color: #25a9c8!important;
   z-index: 10;
 }
 
@@ -125,6 +125,12 @@
   border: 2px solid #25a9c8!important;
 }
 
+@media screen and (max-width: 998px) {
+  .nav__menu{
+    width: 50%;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .product__card{
     width: 50%!important;
@@ -138,11 +144,12 @@
     width: 60%;
   }
 
-  .cart__width{
-    width: 100%!important;
-  }
-
   .nav__menu{
     width: 75%;
   }
+
+  .cart__width{
+    width: 100%!important;
+  }
+  
 }

@@ -18,6 +18,8 @@ import TextBased from './Pages/TextBased';
 import Anime from './Pages/Anime';
 import Best from './Pages/Best';
 import ScrollToTop from './ScrollToTop';
+import Contact from './Pages/Contact';
+import About from './Pages/About';
 
 function App() {
   return (
@@ -38,6 +40,8 @@ function App() {
           <Route exact path='/collections/anime' element={<Anime/>}/>
           <Route exact path='/collections/best-seller' element={<Best/>}/>
           <Route exact path='/product/:slug' element={<Product/>}/>
+          <Route exact path='/contact-us' element={<Contact/>}/>
+          <Route exact path='/about-us' element={<About/>}/>
           <Route exact path='/cart' element={<Cart/>}/>
         </Routes>
       </Router>

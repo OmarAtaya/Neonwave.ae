@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { PageItem, Pagination } from 'react-bootstrap'
 
 function Paginat({nPages, currentPage, setCurrentPage}) {
@@ -11,13 +11,17 @@ function Paginat({nPages, currentPage, setCurrentPage}) {
         if(currentPage !== 1) 
             setCurrentPage(currentPage - 1)
     }
+    useEffect(() => {
+      window.scroll(0,0)
+    }, [currentPage])
+    
     return (
         <Pagination className='d-flex justify-content-center'>
             <Pagination.Prev onClick={prevPage}/>
             {pageNumbers.map((number, index)=> {
                 return (index + 1) === currentPage
-                ?  <PageItem active>{number}</PageItem>
-                :  <PageItem onClick={() => setCurrentPage(index+1)}>{number}</PageItem>
+                ?  <PageItem active key={index}>{number}</PageItem>
+                :  <PageItem onClick={() => setCurrentPage(index+1)} key={index}>{number}</PageItem>
                 
             })}
             <Pagination.Next onClick={nextPage}/>

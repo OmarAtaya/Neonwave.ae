@@ -15,7 +15,7 @@ function Footer() {
                     label="Email address"
                     className="mb-3 text-white w-75"
                     >
-                        <Form.Control type="email" className='bg-black' placeholder=""/>
+                        <Form.Control type="email" className='bg-black text-white' placeholder=""/>
                     </FloatingLabel>
                     <Button type='submit' variant='outline-info' className='w-50 fw-bold'>SUBSCRIBE</Button>
                 </Form>

@@ -22,7 +22,7 @@ function CartOne() {
                 {cart.cartItems.length === 0 && 
                     <div>
                         <h2 className='text-white'>Your Cart Is Empty</h2>
-                        <Link to='/'>
+                        <Link to='/collections/shop-all'>
                             <Button variant='outline-info'>Continue Shopping</Button>
                         </Link> 
                     </div>

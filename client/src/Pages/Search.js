@@ -2,12 +2,17 @@ import React, {useState, useEffect} from 'react';
 import {Container, FormControl, Row, Col } from 'react-bootstrap';
 import ProductCard from '../Components/ProductCard/ProductCard';
 import { useLocation } from 'react-router-dom';
+import Paginat from '../Components/Pagination/Paginat';
 import axios from 'axios';
 
 function Search() {
     const {state} = useLocation();
     const [searchText, setSearchText] = useState(state || '');
     const [products, setProducts] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [recordsPerPage] = useState(16);
+    const indexOfLastRecord = currentPage * recordsPerPage;
+    const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
 
     useEffect(() => {
         fetchData()
@@ -25,6 +30,8 @@ function Search() {
             }
         }
     }, [searchText])
+    const currentRecords = products.slice(indexOfFirstRecord, indexOfLastRecord);
+    const nPages = Math.ceil(products.length / recordsPerPage);
     return (
         <Container className='mt-5' style={{height: 'fit-content', minHeight: '100vh'}}>
             <Row className='d-flex flex-column align-items-center py-5'>
@@ -39,13 +46,22 @@ function Search() {
                
             </Row>
             <Row xs={2} md={4}>
-                {products.map((product, index) => {
+                {currentRecords.map((product, index) => {
                     return(
                         <Col className="mb-5" key={index}>
                             <ProductCard product={product}/>
                         </Col>
                     )
                 })}
+            </Row>
+            <Row>
+                {products.length !== 0 && 
+                    <Paginat
+                        nPages = { nPages }
+                        currentPage = { currentPage } 
+                        setCurrentPage = { setCurrentPage }
+                    />
+                }
             </Row>
         </Container>
     )
