@@ -3,6 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import ProductCard from '../Components/ProductCard/ProductCard';
 import Paginat from '../Components/Pagination/Paginat';
+import { Helmet } from "react-helmet-async";
 
 function Best() {
     const [products, setProducts] = useState([]);
@@ -24,6 +25,9 @@ function Best() {
     const nPages = Math.ceil(products.length / recordsPerPage);
     return (
         <Container className='mt-5' style={{height: 'fit-content', minHeight: '100vh'}}>
+            <Helmet>
+                <title>Best Seller Collection - NeonWave</title>
+            </Helmet>
             <Row className='p-5'>
                 <h4 className='text-info fw-bold'>BEST SELLER</h4>
             </Row>

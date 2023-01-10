@@ -1,9 +1,13 @@
 import React from 'react';
 import { Container, Row } from 'react-bootstrap';
+import { Helmet } from "react-helmet-async";
 
 function Contact() {
     return (
         <Container className='mt-5' style={{height: 'fit-content', minHeight: '100vh'}}>
+          <Helmet>
+            <title>Contact Us - NeonWave</title>
+          </Helmet>
           <Row className='pt-5'>
             <h4 className='text-info p-5'>CONTACT US</h4>
           </Row>

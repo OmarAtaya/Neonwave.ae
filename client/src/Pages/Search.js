@@ -4,6 +4,7 @@ import ProductCard from '../Components/ProductCard/ProductCard';
 import { useLocation } from 'react-router-dom';
 import Paginat from '../Components/Pagination/Paginat';
 import axios from 'axios';
+import { Helmet } from "react-helmet-async";
 
 function Search() {
     const {state} = useLocation();
@@ -34,12 +35,16 @@ function Search() {
     const nPages = Math.ceil(products.length / recordsPerPage);
     return (
         <Container className='mt-5' style={{height: 'fit-content', minHeight: '100vh'}}>
+            <Helmet>
+                <title>Search: {searchText} - NeonWave</title>
+            </Helmet>
             <Row className='d-flex flex-column align-items-center py-5'>
                 <h4 className='text-info'>SEARCH</h4>
                 <h5 className='text-white'>Enter a word to search our products:</h5>
                 <FormControl
                     type="text"
                     placeholder="Enter Item Name"
+                    value={searchText}
                     onChange={(e) => setSearchText(e.currentTarget.value)}
                     className="bg-black text-white w-75"
                 />

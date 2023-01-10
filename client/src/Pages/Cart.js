@@ -4,6 +4,7 @@ import { Button, Container, Row } from 'react-bootstrap';
 import { Store } from '../Store';
 import CartOne from './CartOne';
 import CartThree from './CartThree';
+import { Helmet } from "react-helmet-async";
 import CartTwo from './CartTwo';
 
 function Cart() {
@@ -34,6 +35,9 @@ function Cart() {
 
     return (
         <Container className='mt-5' style={{height: 'fit-content', minHeight: '100vh'}}>
+            <Helmet>
+                <title>Cart - NeonWave</title>
+            </Helmet>
             <Row>
                 {(() => {
                     switch (cartStep) {

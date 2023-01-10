@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { Button, Container, Row } from 'react-bootstrap'
 import { Store } from '../Store'
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from "react-helmet-async";
 
 function Account() {
     const {state: cartState, dispatch: ctxDispatch} = useContext(Store);
@@ -16,6 +17,9 @@ function Account() {
     }
     return (
         <Container fluid className='vh-100 mt-5 text-start'>
+            <Helmet>
+                <title>Account - NeonWave</title>
+            </Helmet>
             <Button variant='outline-danger' className=' m-5 w-auto fw-bold' onClick={handleLogout}>Logout</Button>
             <Row className='px-5 w-100 d-flex flex-column gap-2'>
                 <h3 className='text-info fst-italic' style={{letterSpacing: '3px'}}>MY ACCOUNT</h3>
