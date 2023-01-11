@@ -31,7 +31,6 @@ function CartThree({setCartStep}) {
                         <CartItemBox cartItem={cartItem} key={index} />
                     )
                 })}
-                {cart.cartItems.length === 0 && setCartStep(0)}
             </Row>
         </Container>
     )

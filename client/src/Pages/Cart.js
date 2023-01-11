@@ -23,6 +23,10 @@ function Cart() {
             setTotal(newTotal)
         }
         changeTotal()
+
+        if(cart.cartItems.length === 0){
+            setCartStep(0)
+        }
     },[cartState,cart.cartItems])
     
     
