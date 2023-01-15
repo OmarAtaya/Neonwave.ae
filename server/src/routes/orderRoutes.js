@@ -20,16 +20,24 @@ orderRouter.get('/:id', async (req,res) => {
 
 orderRouter.post(
     "/place",async (req, res) => {
+        const uids = (await Order.find()).length + 1000
         const newOrder = new Order({
             items: req.body.items,
-            // user: req.body.user._id,
+            user: req.body.user._id,
             address: req.body.address,
             total: req.body.total,
-            totaltax: req.body.totaltax
+            uid: uids
         });
         const order = await newOrder.save();
         res.status(201).send({ message: 'New Order Created', order})
       }
 )
+
+orderRouter.get(
+  '/user/:id',async (req, res) => {
+    const orders = await Order.find({ user: req.params.id});
+    res.send(orders);
+  }
+);
 
 module.exports = {orderRouter}

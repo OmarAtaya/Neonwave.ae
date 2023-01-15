@@ -67,24 +67,22 @@ function CartTwo(props) {
                         onChange={(e) => setAddress2(e.currentTarget.value)}
                         className="bg-black text-white mb-3"
                     />
-                    <Form.Group className='d-flex gap-3'>
-                        <FormControl
-                            type="text"
-                            placeholder="Country*"
-                            value={country}
-                            className="bg-black text-white mb-3 w-50"
-                            onChange={(e) => setCountry(e.currentTarget.value)}
-                            required
-                        />
-                        <FormControl
-                            type="text"
-                            placeholder="City*"
-                            value={city}
-                            className="bg-black text-white mb-3 w-50"
-                            onChange={(e) => setCity(e.currentTarget.value)}
-                            required
-                        />
-                    </Form.Group>
+                    <FormControl
+                        type="text"
+                        placeholder="Country*"
+                        value={country}
+                        className="bg-black text-white mb-3"
+                        onChange={(e) => setCountry(e.currentTarget.value)}
+                        required
+                    />
+                    <FormControl
+                        type="text"
+                        placeholder="City*"
+                        value={city}
+                        className="bg-black text-white mb-3"
+                        onChange={(e) => setCity(e.currentTarget.value)}
+                        required
+                    />
                     <FormControl
                         type="text"
                         placeholder="Phone Number*"

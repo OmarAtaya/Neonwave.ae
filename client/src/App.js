@@ -25,6 +25,7 @@ import FAQ from './Pages/FAQ';
 import Size from './Pages/Size';
 import Shipping from './Pages/Shipping';
 import Custom from './Pages/Custom';
+import Order from './Pages/Order';
 
 function App() {
   return (
@@ -53,6 +54,8 @@ function App() {
           <Route exact path='/size-guide' element={<Size/>}/>
           <Route exact path='/shipping-returns' element={<Shipping/>}/>
           <Route exact path='/custom' element={<Custom/>}/>
+          <Route exact path='/order_placed' element={<Order/>}/>
+          <Route exact path='/order_placed/?id' element={<Order/>}/>
         </Routes>
       </Router>
       <hr className='text-light mt-3'/>

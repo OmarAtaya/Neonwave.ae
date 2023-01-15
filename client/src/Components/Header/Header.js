@@ -1,5 +1,5 @@
 import React, {useState,useContext} from 'react';
-import { Container, Row, Col, Image, Nav, Form, FormControl, Button } from 'react-bootstrap';
+import { Container, Row, Col, Image, Nav, Form, FormControl, Button, Collapse } from 'react-bootstrap';
 import Logo from '../../assets/Neon_Wave_3_165x.png';
 import { MdOutlineMenu, MdOutlineShoppingBag, MdOutlineAccountCircle, MdOutlineSearch} from 'react-icons/md';
 import {AiOutlineClose, AiOutlineDown} from 'react-icons/ai';
@@ -89,20 +89,19 @@ function Header() {
                     <Nav.Item className='w-100 border-bottom border-dark mb-3'>
                         <Nav.Link href="/" className='text-black ps-0 pb-3'>HOME</Nav.Link>
                     </Nav.Item>
-                    <Nav.Item className='w-100 border-bottom border-dark mb-3' style={{transition: '2000 ease-in'}}>
+                    <Nav.Item className='w-100 border-bottom border-dark mb-3'>
                         <div className='d-flex justify-content-between align-items-center me-3' onClick={() => setCollection(prev => !prev)}>
                             <Nav.Link className='text-black ps-0 py-3'>COLLECTIONS</Nav.Link>
                             <AiOutlineDown size={25} color='black'/>
                         </div>
-                        
-                        {collection &&
+                        <Collapse in={collection}>
                             <div>
                                 <Nav.Link href="/collections/shop-all" className='text-dark ps-3 py-2'>SHOP ALL</Nav.Link>
                                 <Nav.Link href="/collections/best-seller" className='text-dark ps-3 py-2'>BEST SELLER</Nav.Link>
                                 <Nav.Link href="/collections/text-based" className='text-dark ps-3 py-2'>TEXT BASED</Nav.Link>
                                 <Nav.Link href="/collections/anime" className='text-dark ps-3 py-2'>ANIME</Nav.Link>
                             </div>
-                        }
+                        </Collapse>
                     </Nav.Item>
                     <Nav.Item className='w-100 border-bottom border-dark mb-3'>
                         <Nav.Link href="/custom" className='text-black ps-0 py-3'>CUSTOM NEON SIGNS</Nav.Link>
