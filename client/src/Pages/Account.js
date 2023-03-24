@@ -37,7 +37,7 @@ function Account() {
     if(isLoading)
     {
         return(
-            <h4>is Loading</h4>
+            <h4 className='d-flex justify-content-center align-items-center text-start text-white' style={{height: 'fit-content', minHeight: '100vh'}}>Loading in Progress</h4>
         )
     }
     return (
